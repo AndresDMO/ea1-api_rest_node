@@ -58,7 +58,7 @@ npm install
 
 ```env
 PORT=3000
-MONGODB_URI=mongodb://127.0.0.1:27017/ea1_api
+MONGODB_URI=mongodb://127.0.0.1:27017/catalogo_multimedia
 ```
 
 3. Cargar datos iniciales (generos + tipos):
@@ -178,3 +178,38 @@ npm run dev
   "type": "PUT_TYPE_ID_HERE"
 }
 ```
+
+## Como probar los endpoints (solo Postman)
+
+1. Crea un `Environment` en Postman con estas variables:
+`baseUrl=http://localhost:3000/api`, `genreId=`, `directorId=`, `producerId=`, `typeId=`, `mediaId=`.
+2. Ejecuta `GET {{baseUrl}}/health` para confirmar que la API esta activa.
+3. Crea recursos base en este orden y guarda cada `_id` en su variable de entorno:
+`POST {{baseUrl}}/genres` -> `POST {{baseUrl}}/directors` -> `POST {{baseUrl}}/producers` -> `POST {{baseUrl}}/types`.
+4. Crea media con `POST {{baseUrl}}/media` usando los IDs guardados en variables:
+
+```json
+{
+  "serial": "MOV-0001",
+  "title": "Interstellar",
+  "synopsis": "Un grupo de exploradores viaja por un agujero de gusano.",
+  "url": "https://example.com/interstellar",
+  "coverImage": "https://example.com/interstellar.jpg",
+  "releaseYear": 2014,
+  "genre": "{{genreId}}",
+  "director": "{{directorId}}",
+  "producer": "{{producerId}}",
+  "type": "{{typeId}}"
+}
+```
+
+5. Guarda el `_id` de media en `mediaId` y prueba el CRUD:
+`GET {{baseUrl}}/media`, `GET {{baseUrl}}/media/{{mediaId}}`, `PUT {{baseUrl}}/media/{{mediaId}}`, `DELETE {{baseUrl}}/media/{{mediaId}}`.
+
+## Casos de prueba sugeridos
+
+1. Crear media con `genre` inexistente: debe responder `400`.
+2. Crear dos medias con el mismo `serial`: debe responder `409`.
+3. Consultar `GET /media/:id` con id mal formado: debe responder `400`.
+4. Consultar `GET /media/:id` con id valido pero no existente: debe responder `404`.
+5. Probar `GET /genres/active`, `GET /directors/active` y `GET /producers/active`.

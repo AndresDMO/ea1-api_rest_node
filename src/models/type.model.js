@@ -19,8 +19,6 @@ const typeSchema = new mongoose.Schema(
   }
 );
 
-typeSchema.index({ name: 1 }, { unique: true });
-
 const Type = mongoose.model('Type', typeSchema);
 
 export default Type;

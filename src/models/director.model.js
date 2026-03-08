@@ -19,8 +19,6 @@ const directorSchema = new mongoose.Schema(
   }
 );
 
-directorSchema.index({ name: 1 }, { unique: true });
-
 const Director = mongoose.model('Director', directorSchema);
 
 export default Director;

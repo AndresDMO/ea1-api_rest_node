@@ -29,8 +29,6 @@ const producerSchema = new mongoose.Schema(
   }
 );
 
-producerSchema.index({ name: 1 }, { unique: true });
-
 const Producer = mongoose.model('Producer', producerSchema);
 
 export default Producer;

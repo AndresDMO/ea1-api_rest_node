@@ -19,8 +19,6 @@ const genreSchema = new mongoose.Schema(
   }
 );
 
-genreSchema.index({ name: 1 }, { unique: true });
-
 const Genre = mongoose.model('Genre', genreSchema);
 
 export default Genre;

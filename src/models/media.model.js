@@ -61,9 +61,6 @@ const mediaSchema = new mongoose.Schema(
   }
 );
 
-mediaSchema.index({ serial: 1 }, { unique: true });
-mediaSchema.index({ url: 1 }, { unique: true });
-
 const Media = mongoose.model('Media', mediaSchema);
 
 export default Media;
