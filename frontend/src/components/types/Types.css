@@ -1,0 +1,19 @@
+.table-hover tbody tr:hover {
+  background: rgba(41, 128, 185, 0.08);
+}
+
+.card {
+  border-left: 4px solid #2980b9;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+h1 {
+  color: #064e8b;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
